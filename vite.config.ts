@@ -7,6 +7,7 @@ declare var __dirname: string;
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: "https://nrfq.github.io/ProgressClocks/",
   plugins: [react()],
   assetsInclude: ["**/*.glb", "**/*.hdr"],
   build: {

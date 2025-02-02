@@ -4,10 +4,12 @@
   "version": "0.1.0",
   "type": "module",
   "license": "GPL-3.0",
+  "homepage": "https://nrfq.github.io/ProgressClocks/",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",
@@ -35,6 +37,7 @@
     "@types/react-dom": "^18.0.6",
     "@types/three": "^0.152.1",
     "@vitejs/plugin-react": "^2.1.0",
+    "gh-pages": "^6.3.0",
     "typescript": "^4.6.4",
     "vite": "^3.1.0"
   }
