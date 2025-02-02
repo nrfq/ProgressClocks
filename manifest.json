@@ -9,7 +9,7 @@
   "action": {
     "title": "Dice",
     "icon": "https://nrfq.github.io/ProgressClocks/icon.svg",
-    "popover": "/",
+    "popover": "https://nrfq.github.io/ProgressClocks/index.html",
     "height": 700,
     "width": 375
   },
