@@ -4,14 +4,14 @@
   "manifest_version": 1,
   "author": "Owlbear Rodeo",
   "homepage_url": "https://extensions.owlbear.rodeo/dice",
-  "icon": "/logo.png",
+  "icon": "https://nrfq.github.io/ProgressClocks/logo.png",
   "description": "Beautiful 3D dice extension for d20 based systems",
   "action": {
     "title": "Dice",
-    "icon": "/icon.svg",
+    "icon": "https://nrfq.github.io/ProgressClocks/icon.svg",
     "popover": "/",
     "height": 700,
     "width": 375
   },
-  "background_url": "/background.html"
+  "background_url": "https://nrfq.github.io/ProgressClocks/background.html"
 }
