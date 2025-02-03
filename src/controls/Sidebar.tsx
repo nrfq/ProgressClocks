@@ -1,11 +1,7 @@
-import SimpleBar from "simplebar-react";
-import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
-import {AppBar, TextField, Toolbar} from "@mui/material";
-
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import Toolbar from "@mui/material/Toolbar";
 import AddIcon from '@mui/icons-material/Add';
+import AppBar from "@mui/material/AppBar";
 
 import { PluginGate } from "../plugin/PluginGate";
 import { DiceRollSync } from "../plugin/DiceRollSync";
@@ -13,23 +9,21 @@ import { PartyTrays } from "../plugin/PartyTrays";
 import { ResizeObserver as PluginResizeObserver } from "../plugin/ResizeObserver";
 import IconButton from "@mui/material/IconButton";
 import { useClocksStore } from "../clocks/store";
+import { VisibilityButton } from "./VisibilityButton";
+import {ClockSync} from "../plugin/ClockSync";
 
 export function Sidebar() {
   const allVisible = useClocksStore((state) => state.allVisible);
   const setAllVisible = useClocksStore((state) => state.setAllVisible);
   const addClock = useClocksStore((state) => state.addClock);
   return (
-    <AppBar color="primary" position={"sticky"}>
+    <AppBar color="primary" position={"static"}>
       <Toolbar>
-          <IconButton onClick={() => setAllVisible(!allVisible)} sx={{ fontSize: 18 }} >
-            {allVisible
-              ? <VisibilityIcon />
-              : <VisibilityOffIcon />
-            }
-          </IconButton>
+          <VisibilityButton visible={allVisible} setVisible={(event, value) => setAllVisible(value)} />
           <IconButton onClick={addClock} sx={{ fontSize: 18 }} ><AddIcon /></IconButton>
           <PluginGate>
             <Divider flexItem sx={{ mx: 1 }} />
+            <ClockSync />
             <DiceRollSync />
             <PartyTrays />
             <PluginResizeObserver />

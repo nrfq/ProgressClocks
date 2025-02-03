@@ -2,3 +2,5 @@
 export function getPluginId(path: string) {
   return `nrfq.progressclocks/${path}`;
 }
+
+export const getClockPluginId = () => getPluginId("clocks");

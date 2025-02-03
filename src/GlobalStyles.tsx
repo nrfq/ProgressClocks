@@ -8,6 +8,9 @@ export function GlobalStyles() {
 
   const styles = useMemo(() => {
     return {
+      body: {
+        maxWidth: 300
+      },
       div: {
         ".simplebar-scrollbar:before": {
           background: mode === "dark" ? "#fff" : "rgba(0, 0, 0, 0.87)",

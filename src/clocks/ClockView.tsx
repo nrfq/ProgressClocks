@@ -8,6 +8,7 @@ import { PieChart } from "@mui/x-charts/PieChart";
 import {useEffect, useState} from "react";
 import Slider from "@mui/material/Slider";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import {VisibilityButton} from "../controls/VisibilityButton";
 
 type ClockViewProps = {
   clock: Clock,
@@ -69,10 +70,6 @@ function ClockView({ clock }: ClockViewProps) {
           />
         </div>
         <Stack direction={"column"} useFlexGap sx={{ flexGrow: 1 }} >
-          <Stack gap={2} direction={"row"} justifyContent={"flex-start"} alignItems={"center"} >
-            <IconButton><VisibilityIcon /></IconButton>
-            <ColorPicker color={clock.color} setColor={(color) => setClock({ color })} />
-          </Stack>
           <Slider
             aria-label="Segments"
             value={clock.segments}
@@ -84,6 +81,10 @@ function ClockView({ clock }: ClockViewProps) {
             valueLabelDisplay={"auto"}
             onChange={(event, value) => setClock({ segments: Number(value) })}
           />
+          <Stack gap={2} direction={"row"} justifyContent={"flex-start"} alignItems={"center"} >
+            <VisibilityButton visible={clock.visible} setVisible={(event, value) => setClock({ visible: value })} />
+            <ColorPicker color={clock.color} setColor={(color) => setClock({ color })} />
+          </Stack>
         </Stack>
       </Stack>
       <TextField

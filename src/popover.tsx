@@ -6,8 +6,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import "./fonts/fonts.css";
 import { GlobalStyles } from "./GlobalStyles";
 import { PluginThemeProvider } from "./plugin/PluginThemeProvider";
-import { PopoverTrays } from "./plugin/PopoverTrays";
 import { PluginGate } from "./plugin/PluginGate";
+import { ClockPopover } from "./plugin/ClockPopover";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -15,7 +15,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       <CssBaseline />
       <GlobalStyles />
       <PluginGate>
-        <PopoverTrays />
+        <ClockPopover />
       </PluginGate>
     </PluginThemeProvider>
   </React.StrictMode>
