@@ -21,7 +21,6 @@ import { FairnessTester } from "../tests/FairnessTester";
 /** Dice tray that controls the dice roll store */
 export function InteractiveTray() {
   const allowOrbit = useDebugStore((state) => state.allowOrbit);
-
   return (
     <Box
       component="div"
