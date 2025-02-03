@@ -25,7 +25,7 @@ const clamp = (value: number, min: number, max: number) => (
 
 export const useClocksStore = create<ClockState>()(
   immer((set) => ({
-    allVisible: false,
+    allVisible: true,
     setAllVisible(visible) {
       set((state) => {
         state.allVisible = visible;

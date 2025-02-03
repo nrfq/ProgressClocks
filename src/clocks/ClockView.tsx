@@ -9,32 +9,15 @@ import {useEffect, useState} from "react";
 import Slider from "@mui/material/Slider";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import {VisibilityButton} from "../controls/VisibilityButton";
+import {ProgressClock} from "./ProgressClock";
 
 type ClockViewProps = {
   clock: Clock,
 }
 
-const MAX_SIZE = 100;
-
-const generateSegments = (clock: Clock) => {
-  const data = [];
-  for (let i = 0; i < clock.segments; i++ ) {
-    const color = i < clock.progress ? clock.color : `${clock.color}22`;
-    data.push({ id: i, color , value: 1 })
-  }
-  return data;
-}
-
 function ClockView({ clock }: ClockViewProps) {
   const updateClock = useClocksStore((state) => state.updateClock);
   const removeClock = useClocksStore((state) => state.removeClock);
-  const [segments, setSegments] = useState(generateSegments(clock))
-  const [localHighlight, setLocalHighlight] = useState<number | undefined>(undefined);
-
-  useEffect(() => {
-    const localClock = { ...clock, progress: localHighlight ? localHighlight : clock.progress }
-    setSegments(generateSegments(localClock))
-  }, [clock, localHighlight]);
 
   const setClock = (newClock: Partial<Clock>) => {
     updateClock(clock.id, newClock);
@@ -46,29 +29,7 @@ function ClockView({ clock }: ClockViewProps) {
     <>
       <Stack p={1} gap={1} direction={"row"} alignItems="center" sx={{ transition: "opacity 0.5s" }} >
         <IconButton onClick={remove}><DeleteIcon /></IconButton>
-        <div style={{ maxWidth: MAX_SIZE, maxHeight: MAX_SIZE }}>
-          <PieChart
-            series={[
-              {
-                data: segments,
-                paddingAngle: 3,
-                innerRadius: MAX_SIZE * 0.1574,
-                cornerRadius: MAX_SIZE * 0.04,
-                outerRadius: MAX_SIZE / 2,
-                cx: (MAX_SIZE / 2) - 2.5,
-                cy: (MAX_SIZE / 2) - 2.5,
-              },
-            ]}
-            width={MAX_SIZE + 5}
-            height={MAX_SIZE + 5}
-            tooltip={{ trigger: "none" }}
-            onItemClick={(event, item) => setClock({ progress: item.dataIndex + 1 })}
-            onHighlightChange={(item) => {
-              setLocalHighlight(item?.dataIndex !== undefined ? item.dataIndex + 1 : undefined)
-            }}
-            sx={{ alignItems: "center", justifyContent: "center" }}
-          />
-        </div>
+        <ProgressClock clock={clock} readonly={false} />
         <Stack direction={"column"} useFlexGap sx={{ flexGrow: 1 }} >
           <Slider
             aria-label="Segments"

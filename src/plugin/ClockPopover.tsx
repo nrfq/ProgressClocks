@@ -6,6 +6,8 @@ import Box from "@mui/material/Box";
 import { PopoverTray } from "./PopoverTray";
 import { getClockPluginId, getPluginId } from "./getPluginId";
 import { Clock } from "../clocks/store";
+import {getPlayers, getRole, onPartyChanged} from "./Owlbear";
+import {ClockListReadonly} from "./ClockListReadonly";
 
 const usePublicClocks = (gm: Player | undefined) => {
   return useMemo(() => {
@@ -18,17 +20,17 @@ export function ClockPopover() {
   const [isGM, setIsGm] = useState(false);
 
   useEffect(() => {
-    OBR.player.getRole()
+    getRole()
       .then((role) => {
         setIsGm(role === "GM");
       })
-      .then(() => OBR.party.getPlayers())
+      .then(() => getPlayers())
       .then((players) => {
         setGm(players.find(player => player.role === "GM"));
       });
   }, []);
 
-  useEffect(() => OBR.party.onChange((players) => {
+  useEffect(() => onPartyChanged((players) => {
     setGm(players.find(player => player.role === "GM"));
   }), []);
 
@@ -55,6 +57,8 @@ export function ClockPopover() {
 
   // Hide popover when no trays are visible
   const hidden = clocks.length === 0 || isGM;
+  console.log("clocks", clocks);
+  console.log("isGM", isGM);
   useEffect(() => {
     if (hidden) {
       OBR.popover.setHeight(getPluginId("popover"), 0);
@@ -77,8 +81,10 @@ export function ClockPopover() {
       top="0"
       overflow="hidden"
     >
-      {hidden && "She hidden tho"}
-      {clocks.map((clock) => clock.name)}
+      {hidden
+        ? "She hidden tho"
+        : <ClockListReadonly clocks={clocks} />
+      }
     </Box>
   );
 }

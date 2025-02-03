@@ -5,7 +5,6 @@ import AppBar from "@mui/material/AppBar";
 
 import { PluginGate } from "../plugin/PluginGate";
 import { DiceRollSync } from "../plugin/DiceRollSync";
-import { PartyTrays } from "../plugin/PartyTrays";
 import { ResizeObserver as PluginResizeObserver } from "../plugin/ResizeObserver";
 import IconButton from "@mui/material/IconButton";
 import { useClocksStore } from "../clocks/store";
@@ -25,7 +24,6 @@ export function Sidebar() {
             <Divider flexItem sx={{ mx: 1 }} />
             <ClockSync />
             <DiceRollSync />
-            <PartyTrays />
             <PluginResizeObserver />
           </PluginGate>
       </Toolbar>
