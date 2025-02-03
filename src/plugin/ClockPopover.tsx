@@ -4,8 +4,8 @@ import {useEffect, useMemo, useState} from "react";
 import Box from "@mui/material/Box";
 
 import { PopoverTray } from "./PopoverTray";
-import {getClockPluginId, getPluginId} from "./getPluginId";
-import {Clock} from "../clocks/store";
+import { getClockPluginId, getPluginId } from "./getPluginId";
+import { Clock } from "../clocks/store";
 
 const usePublicClocks = (gm: Player | undefined) => {
   return useMemo(() => {
@@ -28,7 +28,10 @@ export function ClockPopover() {
       });
   }, []);
 
-  // useEffect(() => OBR.party.onChange(setPlayers), []);
+  useEffect(() => OBR.party.onChange((players) => {
+    setGm(players.find(player => player.role === "GM"));
+  }), []);
+
   const clocks = usePublicClocks(gm);
 
   // function handleTrayToggle(connectionId: string, shown: boolean) {

@@ -38,7 +38,7 @@ export const useClocksStore = create<ClockState>()(
         const clock: Clock = {
           id,
           segments: 4,
-          color: "#FFFFFF",
+          color: "#f47373",
           name: "New Clock",
           visible: false,
           progress: 0,

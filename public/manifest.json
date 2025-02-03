@@ -1,5 +1,5 @@
 {
-  "name": "Dice",
+  "name": "Progress Clocks",
   "version": "2.0.0",
   "manifest_version": 1,
   "author": "nrfq",
@@ -11,7 +11,7 @@
     "icon": "https://nrfq.github.io/ProgressClocks/icon.svg",
     "popover": "https://nrfq.github.io/ProgressClocks/index.html",
     "height": 700,
-    "width": 375
+    "width": 300
   },
   "background_url": "https://nrfq.github.io/ProgressClocks/background.html"
 }
