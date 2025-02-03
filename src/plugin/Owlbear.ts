@@ -75,3 +75,18 @@ export const onPartyChanged = (callback: (players: Player[]) => void) => {
     OBR.party.onChange(callback);
   }
 }
+
+export const isAvailable = () => {
+  if (isProd) {
+    return OBR.isAvailable;
+  }
+  return true;
+}
+
+export const onReady = (callback: () => void) => {
+  if (isProd) {
+    OBR.onReady(callback);
+  } else {
+    callback();
+  }
+}

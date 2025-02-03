@@ -14,9 +14,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <PluginThemeProvider>
       <CssBaseline />
       <GlobalStyles />
-      {/*<PluginGate>*/}
+      <PluginGate>
         <ClockPopover />
-      {/*</PluginGate>*/}
+      </PluginGate>
     </PluginThemeProvider>
   </React.StrictMode>
 );
