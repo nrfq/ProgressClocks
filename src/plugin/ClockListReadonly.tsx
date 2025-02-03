@@ -23,7 +23,6 @@ export function ClockListReadonly({ clocks }: ClockListReadonlyProps) {
     <Box component="div" position="absolute" right={16} bottom={16}>
       <Slide
         in={true}
-        // onExited={() => onToggle(player.connectionId, false)}
         direction="up"
       >
           <Paper
