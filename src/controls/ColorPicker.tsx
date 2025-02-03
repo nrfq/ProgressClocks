@@ -3,7 +3,6 @@ import { useState } from "react";
 import Menu from "@mui/material/Menu";
 import Tooltip from "@mui/material/Tooltip";
 
-import { useDiceRollStore } from "../dice/store";
 import {BlockPicker, ColorChangeHandler} from "react-color";
 import {ColorButton} from "./ColorButton";
 

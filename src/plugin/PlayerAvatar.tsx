@@ -7,8 +7,6 @@ import IconButton from "@mui/material/IconButton";
 import Avatar from "@mui/material/Avatar";
 import { useTheme } from "@mui/material/styles";
 
-import { usePlayerDice } from "./usePlayerDice";
-
 export function PlayerAvatar({
   player,
   onSelect,
@@ -16,14 +14,12 @@ export function PlayerAvatar({
   player: Player;
   onSelect: () => void;
 }) {
-  const { finalValue, finishedRolling } = usePlayerDice(player);
-
   const theme = useTheme();
 
   return (
     <Stack alignItems="center" my={0.5}>
       <Badge
-        badgeContent={finishedRolling ? finalValue : null}
+        badgeContent={null}
         showZero
         overlap="circular"
         anchorOrigin={{
