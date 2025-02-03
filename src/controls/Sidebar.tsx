@@ -9,6 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import { useClocksStore } from "../clocks/store";
 import { VisibilityButton } from "./VisibilityButton";
 import { ClockSync } from "../plugin/ClockSync";
+import {TooltipButton} from "./TooltipButton";
 
 export function Sidebar() {
   const allVisible = useClocksStore((state) => state.allVisible);
@@ -17,8 +18,14 @@ export function Sidebar() {
   return (
     <AppBar color="primary" position={"static"}>
       <Toolbar>
-          <VisibilityButton visible={allVisible} setVisible={(event, value) => setAllVisible(value)} />
-          <IconButton onClick={addClock} sx={{ fontSize: 18 }} ><AddIcon /></IconButton>
+          <VisibilityButton
+            visible={allVisible}
+            title={allVisible ? "Hide All" : "Show All"}
+            setVisible={(event, value) => setAllVisible(value)}
+          />
+          <TooltipButton onClick={addClock} title={"Add Clock"}>
+            <AddIcon />
+          </TooltipButton>
           <PluginGate>
             <Divider flexItem sx={{ mx: 1 }} />
             <ClockSync />

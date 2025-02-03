@@ -43,7 +43,11 @@ function ClockView({ clock }: ClockViewProps) {
             onChange={(event, value) => setClock({ segments: Number(value) })}
           />
           <Stack gap={2} direction={"row"} justifyContent={"flex-start"} alignItems={"center"} >
-            <VisibilityButton visible={clock.visible} setVisible={(event, value) => setClock({ visible: value })} />
+            <VisibilityButton
+              title={clock.visible ? "Hide" : "Show"}
+              visible={clock.visible}
+              setVisible={(event, value) => setClock({ visible: value })}
+            />
             <ColorPicker color={clock.color} setColor={(color) => setClock({ color })} />
           </Stack>
         </Stack>

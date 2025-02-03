@@ -71,10 +71,7 @@ export function ClockPopover() {
       top="0"
       overflow="hidden"
     >
-      {hidden
-        ? "She hidden tho"
-        : <ClockListReadonly clocks={clocks} />
-      }
+      {!hidden && <ClockListReadonly clocks={clocks} />}
     </Box>
   );
 }
