@@ -11,7 +11,7 @@ function ClockList(props: ClockListProps) {
   const clocks = useClocksStore((state) => state.clocks);
 
   return (
-    <Stack direction={"column"} spacing={2} divider={<Divider />}>
+    <Stack padding={"10px"} direction={"column"} spacing={2} divider={<Divider />}>
       {clocks.map(clock => <ClockView key={clock.id} clock={clock} />)}
     </Stack>
   );

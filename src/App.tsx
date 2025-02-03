@@ -1,11 +1,12 @@
-import { Sidebar } from "./controls/Sidebar";
-import {ClockList} from "./clocks/ClockList";
+import { PluginGate } from "./plugin/PluginGate";
+import {MainView} from "./clocks/MainView";
 
 export function App() {
   return (
     <div style={{ maxWidth: 300 }}>
-      <Sidebar />
-      <ClockList />
+      <PluginGate>
+        <MainView />
+      </PluginGate>
     </div>
   );
 }

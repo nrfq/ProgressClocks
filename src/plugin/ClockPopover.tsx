@@ -3,31 +3,22 @@ import {useEffect, useMemo, useState} from "react";
 
 import Box from "@mui/material/Box";
 
-import { getClockPluginId, getPluginId } from "./getPluginId";
-import { Clock } from "../clocks/store";
-import {getPlayers, getRole, onPartyChanged} from "./Owlbear";
-import {ClockListReadonly} from "./ClockListReadonly";
-
-const usePublicClocks = (gm: Player | undefined) => {
-  return useMemo(() => {
-    return (gm?.metadata[getClockPluginId()] ?? []) as Clock[]
-  }, [gm]);
-}
+import { getPluginId } from "./getPluginId";
+import { getPlayers, onPartyChanged, useRole, usePublicClocks } from "./Owlbear";
+import { ClockListReadonly } from "./ClockListReadonly";
 
 export function ClockPopover() {
+  const role = useRole();
   const [gm, setGm] = useState<Player | undefined>(undefined);
-  const [isGM, setIsGm] = useState(false);
+
+  const isGM = role === "GM"
 
   useEffect(() => {
-    getRole()
-      .then((role) => {
-        setIsGm(role === "GM");
-      })
-      .then(() => getPlayers())
+    getPlayers()
       .then((players) => {
         setGm(players.find(player => player.role === "GM"));
       });
-  }, []);
+  }, [role]);
 
   useEffect(() => onPartyChanged((players) => {
     setGm(players.find(player => player.role === "GM"));

@@ -1,5 +1,7 @@
 import OBR, {Player} from "@owlbear-rodeo/sdk";
 import {getClockPluginId} from "./getPluginId";
+import {useEffect, useMemo, useState} from "react";
+import {Clock} from "../clocks/store";
 
 export const isProd = import.meta.env.MODE === "production";
 
@@ -7,7 +9,7 @@ export const getRole = async () => {
   if (isProd) {
     return await OBR.player.getRole();
   };
-  return "PLAYER";
+  return "GM";
 }
 
 const clockTestData = [
@@ -89,4 +91,18 @@ export const onReady = (callback: () => void) => {
   } else {
     callback();
   }
+}
+
+export const usePublicClocks = (gm: Player | undefined) => {
+  return useMemo(() => {
+    return (gm?.metadata[getClockPluginId()] ?? []) as Clock[]
+  }, [gm]);
+}
+
+export const useRole = () => {
+  const [role, setRole] = useState<Player["role"] | undefined>(undefined);
+  useEffect(() => {
+    getRole().then(role => setRole(role))
+  }, []);
+  return role;
 }

@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from "react";
+import {ReactNode, PropsWithChildren, useEffect, useState, FC} from "react";
 import {isAvailable, onReady} from "./Owlbear";
+
+type PluginGateProps = PropsWithChildren<{
+  fallback?: ReactNode
+}>
 
 /**
  * Only render the children when we're within a plugin
  * and that plugin is ready.
  */
-export function PluginGate({ children }: { children: React.ReactNode }) {
+export const PluginGate = ({ fallback = null, children = null }: PluginGateProps) => {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -16,7 +20,8 @@ export function PluginGate({ children }: { children: React.ReactNode }) {
 
   if (ready) {
     return <>{children}</>;
-  } else {
-    return null;
+  } else if (fallback) {
+    return <>{fallback}</>;
   }
+  return null;
 }
