@@ -1,7 +1,7 @@
 import OBR, {Player} from "@owlbear-rodeo/sdk";
 import {getClockPluginId} from "./getPluginId";
 
-export const isProd = true;
+export const isProd = import.meta.env.MODE === "production";
 
 export const getRole = async () => {
   if (isProd) {

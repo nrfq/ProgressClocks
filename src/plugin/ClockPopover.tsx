@@ -3,7 +3,6 @@ import {useEffect, useMemo, useState} from "react";
 
 import Box from "@mui/material/Box";
 
-import { PopoverTray } from "./PopoverTray";
 import { getClockPluginId, getPluginId } from "./getPluginId";
 import { Clock } from "../clocks/store";
 import {getPlayers, getRole, onPartyChanged} from "./Owlbear";
@@ -65,9 +64,9 @@ export function ClockPopover() {
       OBR.popover.setWidth(getPluginId("popover"), 0);
     } else {
       // Height = Tray + Name + Bottom
-      OBR.popover.setHeight(getPluginId("popover"), 298);
+      OBR.popover.setHeight(getPluginId("popover"), 315 + 16);
       // Width = Tray + Right
-      OBR.popover.setWidth(getPluginId("popover"), 266);
+      OBR.popover.setWidth(getPluginId("popover"), 230 + 16);
     }
   }, [hidden]);
 
