@@ -4,12 +4,11 @@ import AddIcon from '@mui/icons-material/Add';
 import AppBar from "@mui/material/AppBar";
 
 import { PluginGate } from "../plugin/PluginGate";
-import { DiceRollSync } from "../plugin/DiceRollSync";
 import { ResizeObserver as PluginResizeObserver } from "../plugin/ResizeObserver";
 import IconButton from "@mui/material/IconButton";
 import { useClocksStore } from "../clocks/store";
 import { VisibilityButton } from "./VisibilityButton";
-import {ClockSync} from "../plugin/ClockSync";
+import { ClockSync } from "../plugin/ClockSync";
 
 export function Sidebar() {
   const allVisible = useClocksStore((state) => state.allVisible);
@@ -23,8 +22,7 @@ export function Sidebar() {
           <PluginGate>
             <Divider flexItem sx={{ mx: 1 }} />
             <ClockSync />
-            <DiceRollSync />
-            <PluginResizeObserver />
+            {/*<PluginResizeObserver />*/}
           </PluginGate>
       </Toolbar>
     </AppBar>
