@@ -49,7 +49,14 @@ function ProgressClock({ clock, readonly }: ClockProps) {
         width={MAX_SIZE + 5}
         height={MAX_SIZE + 5}
         tooltip={{ trigger: "none" }}
-        onItemClick={readonly ? undefined : (event, item) => setClock({ progress: item.dataIndex + 1 })}
+        onItemClick={readonly ? undefined : (event, item) => {
+          let progress = item.dataIndex + 1;
+          if (progress === clock.progress) {
+            progress = 0;
+            setLocalHighlight(0);
+          }
+          setClock({ progress })
+        }}
         onHighlightChange={readonly ? undefined : (item) => {
           setLocalHighlight(item?.dataIndex !== undefined ? item.dataIndex + 1 : undefined)
         }}
