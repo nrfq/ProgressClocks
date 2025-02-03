@@ -1,4 +1,4 @@
-import OBR, {Player} from "@owlbear-rodeo/sdk";
+import OBR, {Metadata, Player} from "@owlbear-rodeo/sdk";
 import {getClockPluginId} from "./getPluginId";
 import {useEffect, useMemo, useState} from "react";
 import {Clock} from "../clocks/store";
@@ -105,4 +105,11 @@ export const useRole = () => {
     getRole().then(role => setRole(role))
   }, []);
   return role;
+}
+
+export const setMetadata = async (update: Partial<Metadata>) => {
+  if (isProd) {
+    return await OBR.player.setMetadata(update)
+  }
+  return null;
 }

@@ -2,15 +2,15 @@ import OBR from "@owlbear-rodeo/sdk";
 import { useEffect } from "react";
 import { useClocksStore, Clock } from "../clocks/store";
 import { getClockPluginId } from "./getPluginId";
+import { setMetadata } from "./Owlbear";
 
 const useClockSync = () => {
+  const clocks = useClocksStore((state) => state.clocks);
   useEffect(
     () => {
-      const clocks = useClocksStore((state) => state.clocks);
-      OBR.player.setMetadata({ // sync on initial hydration
+      setMetadata({ // sync on initial hydration
         [getClockPluginId()]: clocks,
       })
-
       useClocksStore.subscribe((state, prevState) => {
         let changed = false;
         let clocks: Clock[] = [];
@@ -29,7 +29,7 @@ const useClockSync = () => {
         }
 
         if (changed) {
-          OBR.player.setMetadata({
+          setMetadata({
             [getClockPluginId()]: clocks,
           });
         }
