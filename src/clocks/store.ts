@@ -11,7 +11,7 @@ export type Clock = {
   id: string;
 }
 
-type ClockState = {
+export type ClockState = {
   allVisible: boolean,
   setAllVisible: (visible: boolean) => void
   clocks: Clock[];
