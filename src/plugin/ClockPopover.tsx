@@ -1,10 +1,9 @@
-import OBR, { Player } from "@owlbear-rodeo/sdk";
-import {useEffect, useMemo, useState} from "react";
+import { Player } from "@owlbear-rodeo/sdk";
+import {useEffect, useState} from "react";
 
 import Box from "@mui/material/Box";
 
-import { getPluginId } from "./getPluginId";
-import { getPlayers, onPartyChanged, useRole, usePublicClocks } from "./Owlbear";
+import {getPlayers, onPartyChanged, useRole, usePublicClocks, adjustPopoverHeight} from "./Owlbear";
 import { ClockListReadonly } from "./ClockListReadonly";
 
 export function ClockPopover() {
@@ -47,18 +46,8 @@ export function ClockPopover() {
 
   // Hide popover when no trays are visible
   const hidden = clocks.length === 0 || isGM;
-  console.log("clocks", clocks);
-  console.log("isGM", isGM);
   useEffect(() => {
-    if (hidden) {
-      OBR.popover.setHeight(getPluginId("popover"), 0);
-      OBR.popover.setWidth(getPluginId("popover"), 0);
-    } else {
-      // Height = Tray + Name + Bottom
-      OBR.popover.setHeight(getPluginId("popover"), 315 + 16);
-      // Width = Tray + Right
-      OBR.popover.setWidth(getPluginId("popover"), 230 + 16);
-    }
+    adjustPopoverHeight(hidden);
   }, [hidden]);
 
   return (

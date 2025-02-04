@@ -1,5 +1,5 @@
 import OBR, {Metadata, Player} from "@owlbear-rodeo/sdk";
-import {getClockPluginId} from "./getPluginId";
+import {getClockPluginId, getPluginId} from "./getPluginId";
 import {useEffect, useMemo, useState} from "react";
 import {Clock} from "../clocks/store";
 
@@ -9,7 +9,7 @@ export const getRole = async () => {
   if (isProd) {
     return await OBR.player.getRole();
   };
-  return "GM";
+  return window.location.pathname.includes("popover") ? "PLAYER" : "GM"; // assume player on dev popover page
 }
 
 const clockTestData = [
@@ -19,7 +19,7 @@ const clockTestData = [
     name: "Test Clock",
     visible: true,
     progress: 3,
-    id: 123456,
+    id: 1,
   },
   {
     segments: 12,
@@ -27,7 +27,7 @@ const clockTestData = [
     name: "The Baron",
     visible: true,
     progress: 7,
-    id: 123456,
+    id: 2,
   },
   {
     segments: 4,
@@ -35,7 +35,7 @@ const clockTestData = [
     name: "Suspicion",
     visible: true,
     progress: 1,
-    id: 123456,
+    id: 3,
   },
   {
     segments: 6,
@@ -43,7 +43,7 @@ const clockTestData = [
     name: "Good thing",
     visible: true,
     progress: 1,
-    id: 123456,
+    id: 4,
   },
   {
     segments: 6,
@@ -51,7 +51,7 @@ const clockTestData = [
     name: "Good thing",
     visible: true,
     progress: 1,
-    id: 123456,
+    id: 5,
   }
 ]
 
@@ -112,4 +112,21 @@ export const setMetadata = async (update: Partial<Metadata>) => {
     return await OBR.player.setMetadata(update)
   }
   return null;
+}
+
+export const adjustPopoverHeight = (hidden: boolean) => {
+  if (!isProd) {
+    return;
+  }
+
+  if (hidden) {
+    OBR.popover.setHeight(getPluginId("popover"), 0);
+    OBR.popover.setWidth(getPluginId("popover"), 0);
+  } else {
+    // Height = Tray + Name + Bottom
+    OBR.popover.setHeight(getPluginId("popover"), 315 + 16);
+    // Width = Tray + Right
+    OBR.popover.setWidth(getPluginId("popover"), 230 + 16);
+  }
+
 }

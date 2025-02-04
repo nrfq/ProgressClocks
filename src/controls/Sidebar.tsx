@@ -4,8 +4,6 @@ import AddIcon from '@mui/icons-material/Add';
 import AppBar from "@mui/material/AppBar";
 
 import { PluginGate } from "../plugin/PluginGate";
-import { ResizeObserver as PluginResizeObserver } from "../plugin/ResizeObserver";
-import IconButton from "@mui/material/IconButton";
 import { useClocksStore } from "../clocks/store";
 import { VisibilityButton } from "./VisibilityButton";
 import { ClockSync } from "../plugin/ClockSync";

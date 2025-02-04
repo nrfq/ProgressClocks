@@ -1,8 +1,3 @@
-import { Environment } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
-import { Player } from "@owlbear-rodeo/sdk";
-import { useEffect, useState } from "react";
-
 import Box from "@mui/material/Box";
 import Slide from "@mui/material/Slide";
 import Typography from "@mui/material/Typography";
@@ -12,6 +7,7 @@ import Paper from "@mui/material/Paper";
 import {Clock} from "../clocks/store";
 import {ClockViewReadonly} from "./ClockViewReadonly";
 import {Grid2} from "@mui/material";
+import SimpleBar from "simplebar-react";
 
 type ClockListReadonlyProps = {
   clocks: Clock[],
@@ -39,11 +35,20 @@ export function ClockListReadonly({ clocks }: ClockListReadonlyProps) {
             }}
           >
               <Box sx={{ boxShadow: "0 8px 6px -6px black" }}>
-                <Box component="div" height="calc(315px - 32px)" width="230px" sx={{ overflow: "scroll" }}>
+                <SimpleBar
+                  style={{
+                    maxHeight: 315 - 32,
+                    height: 315 - 32,
+                    width: 230,
+                    overflow: "auto",
+                  }}
+                >
+                {/*<Box component="div" height="calc(315px - 32px)" width="230px" sx={{ overflow: "scroll" }}>*/}
                   <Grid2 container spacing={2}>
-                    {clocks.map((clock) => <ClockViewReadonly clock={clock} />)}
+                    {clocks.map((clock) => <ClockViewReadonly key={clock.id} clock={clock} />)}
                   </Grid2>
-                </Box>
+                {/*</Box>*/}
+                </SimpleBar>
               </Box>
               <Typography
                 variant="subtitle1"
@@ -55,7 +60,7 @@ export function ClockListReadonly({ clocks }: ClockListReadonlyProps) {
                 }}
                 noWrap
               >
-                Progress Clocks (Scrollable)
+                Progress Clocks
               </Typography>
           </Paper>
       </Slide>
