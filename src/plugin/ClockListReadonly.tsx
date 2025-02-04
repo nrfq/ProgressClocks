@@ -8,6 +8,7 @@ import {Clock} from "../clocks/store";
 import {ClockViewReadonly} from "./ClockViewReadonly";
 import {Grid2} from "@mui/material";
 import SimpleBar from "simplebar-react";
+import Divider from "@mui/material/Divider";
 
 type ClockListReadonlyProps = {
   clocks: Clock[],
@@ -22,16 +23,12 @@ export function ClockListReadonly({ clocks }: ClockListReadonlyProps) {
         direction="up"
       >
           <Paper
-            elevation={8}
+            elevation={0}
             sx={{
               width: "230px",
               height: "315px",
               borderRadius: 2,
               overflow: "hidden",
-              backgroundColor:
-                theme.palette.mode === "dark"
-                  ? "rgba(34, 38, 57, 0.8)"
-                  : "rgba(255, 255, 255, 0.4)",
             }}
           >
               <Box sx={{ boxShadow: "0 8px 6px -6px black" }}>
@@ -43,11 +40,9 @@ export function ClockListReadonly({ clocks }: ClockListReadonlyProps) {
                     overflow: "auto",
                   }}
                 >
-                {/*<Box component="div" height="calc(315px - 32px)" width="230px" sx={{ overflow: "scroll" }}>*/}
                   <Grid2 container spacing={2}>
                     {clocks.map((clock) => <ClockViewReadonly key={clock.id} clock={clock} />)}
                   </Grid2>
-                {/*</Box>*/}
                 </SimpleBar>
               </Box>
               <Typography
