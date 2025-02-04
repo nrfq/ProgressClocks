@@ -2,12 +2,14 @@ import { Theme as MuiTheme, createTheme } from "@mui/material/styles";
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import OBR, { Theme } from "@owlbear-rodeo/sdk";
 import { useEffect, useState } from "react";
+import { isAvailable, onReady } from "./Owlbear";
 
 /**
  * Create a MUI theme based off of the current OBR theme
  * If no theme is provided create the base dark theme
  */
 function getTheme(theme?: Theme) {
+  console.info("we even get the theme", theme, "show me")
   return createTheme({
     palette: theme
       ? {
@@ -37,7 +39,7 @@ function getTheme(theme?: Theme) {
       MuiCssBaseline: {
         styleOverrides: {
           body: {
-            backgroundColor: OBR.isAvailable ? "transparent" : undefined,
+            backgroundColor: isAvailable() ? "transparent" : undefined,
           },
         },
       },
@@ -51,7 +53,7 @@ function getTheme(theme?: Theme) {
           paper: {
             backgroundImage:
               theme?.mode === "LIGHT"
-                ? "linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05))"
+                ? undefined
                 : "linear-gradient(rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.07))",
           },
         },
@@ -72,8 +74,8 @@ export function PluginThemeProvider({
   const [ready, setReady] = useState(() => OBR.isReady);
 
   useEffect(() => {
-    if (OBR.isAvailable) {
-      OBR.onReady(() => setReady(true));
+    if (isAvailable()) {
+      onReady(() => setReady(true));
     }
   }, []);
 

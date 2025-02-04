@@ -15,6 +15,9 @@ function ClockList(props: ClockListProps) {
       style={{
         maxHeight: "calc(100dvh - 64px)",
         height: "calc(100dvh - 64px)",
+        width: 300,
+        maxWidth: 300,
+        overflowX: "hidden",
         overflowY: "auto",
       }}
     >
